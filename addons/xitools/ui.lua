@@ -7,7 +7,7 @@ local ui = {
         WindowPadding     = { 10, 10 },
         FramePaddingNone  = { 0, 0 },
         FramePaddingSome  = { 4, 2 },
-        BarSize           = { 199, 15 },
+        BarSize           = { 199, 18 },
     },
     Colors = {
         White          = { 1.00, 1.00, 1.00, 1.0 },
