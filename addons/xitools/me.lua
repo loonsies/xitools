@@ -21,10 +21,11 @@ local function DrawHeader(name, job, jobLevel, sub, subLevel, options)
         jobStr = string.format('%s%i', ffxi.GetJobAbbr(job), jobLevel)
     end
 
-    local width = imgui.CalcTextSize(jobStr) + ui.Styles.WindowPadding[1] * Scale
+    local jobStrWidth = imgui.CalcTextSize(jobStr)
+    local contentRightX = imgui.GetWindowContentRegionMax()
 
     imgui.SameLine()
-    imgui.SetCursorPosX(options.size[1] * Scale - width)
+    imgui.SetCursorPosX(contentRightX - jobStrWidth)
     imgui.Text(jobStr)
 end
 
@@ -148,7 +149,7 @@ local me = {
         isEnabled = T{ false },
         isVisible = T{ true },
         name = 'xitools.me',
-        size = T{ 276, -1 },
+        size = T{ -1, -1 },
         pos = T{ 100, 100 },
         flags = bit.bor(ImGuiWindowFlags_NoDecoration),
     },
