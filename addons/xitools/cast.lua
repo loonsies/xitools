@@ -33,7 +33,7 @@ local cast = {
             if player
             and action.actor_id == player.ServerId
             and ActionTypes[action.category]
-            and action.param == 0x6163 then
+            and bit.band(action.param, 0xFFFF) == 0x6163 then
                 local res = AshitaCore:GetResourceManager()
 
                 if action.category == packets.inbound.action.actionTypes.SpellStart then
