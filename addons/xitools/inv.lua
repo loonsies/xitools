@@ -737,7 +737,7 @@ local inv = {
         size = T{ 0, 0 },
         maxHeight = T{ 432 },
         pos = T{ 256, 256 },
-        flags = bit.bor(ImGuiWindowFlags_NoResize),
+        flags = bit.bor(ImGuiWindowFlags_AlwaysAutoResize),
     },
     Load = function()
         if GetPlayerEntity() ~= nil then
