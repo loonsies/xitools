@@ -242,7 +242,7 @@ local week = {
         name = 'xitools.week',
         size = T{ -1, -1 },
         pos = T{ 100, 100 },
-        flags = bit.bor(ImGuiWindowFlags_NoResize),
+        flags = bit.bor(ImGuiWindowFlags_AlwaysAutoResize),
         timers = T{ },
     },
     HandleCommand = function(args, options)
