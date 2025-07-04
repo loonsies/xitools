@@ -116,7 +116,7 @@ function ui.DrawNormalWindow(config, gConfig, drawStuff)
         return
     end
 
-    imgui.SetNextWindowSize(ui.Scale(config.size, gConfig.uiScale[1]), ImGuiCond_Always)
+    imgui.SetNextWindowSize(ui.Scale(config.size, gConfig.uiScale[1]), ImGuiCond_FirstUseEver)
     imgui.SetNextWindowPos(config.pos, ImGuiCond_FirstUseEver)
 
     if config.maxHeight then
