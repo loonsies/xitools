@@ -198,7 +198,7 @@ local treas = {
         name = 'xitools.treas',
         size = T{ -1, -1 },
         pos = T{ 100, 100 },
-        flags = bit.bor(ImGuiWindowFlags_NoResize),
+        flags = bit.bor(ImGuiWindowFlags_AlwaysAutoResize),
     },
     HandleCommand = function (args, options, gOptions)
         if #args == 0 then
