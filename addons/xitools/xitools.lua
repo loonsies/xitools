@@ -77,7 +77,7 @@ local defaultOptions = T{
             name = 'xitools.config',
             size = T{ -1, -1 },
             pos = T{ 100, 100 },
-            flags = ImGuiWindowFlags_NoResize,
+            flags = ImGuiWindowFlags_AlwaysAutoResize,
         },
         me = me.DefaultSettings,
         us = us.DefaultSettings,
