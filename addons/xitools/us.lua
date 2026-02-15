@@ -11,8 +11,8 @@ local zones = require('utils/zones')
 
 local Scale = 1.0
 
-local Textures = { }
-local Alliances = { }
+local Textures = {}
+local Alliances = {}
 
 -- notes on PartyMemberFlagMask
 -- bit 0: ? maybe party 2?
@@ -103,7 +103,7 @@ local function GetBuffs2(party, serverId)
         local playerId = ashita.memory.read_uint32(memberPtr)
 
         if playerId == serverId then
-            local buffs = { }
+            local buffs = {}
 
             for buffIndex = 0, 31 do
                 local fMod = math.fmod(buffIndex, 4) * 2
@@ -120,7 +120,7 @@ local function GetBuffs2(party, serverId)
         end
     end
 
-    return { }
+    return {}
 end
 
 local function GetBuffs(party, serverId)
@@ -130,7 +130,7 @@ local function GetBuffs(party, serverId)
         if sId == serverId then
             local icons_lo = party:GetStatusIcons(i)
             local icons_hi = party:GetStatusIconsBitMask(i)
-            local effects = { }
+            local effects = {}
 
             for b = 0, 31 do
                 --[[ FIXME: lua doesn't handle 64bit return values properly..
@@ -150,13 +150,13 @@ local function GetBuffs(party, serverId)
                 if buff_id ~= 255 then
                     table.insert(effects, buff_id)
                 end
-             end
+            end
 
-             return effects
+            return effects
         end
     end
 
-    return { }
+    return {}
 end
 
 local function FilterBuffs(buffList)
@@ -196,7 +196,8 @@ local function GetPlayer(options, target, party, stal)
         isPartyLeader = bit.band(party:GetMemberFlagMask(0), 4) == 4,
         isAllianceLeader = bit.band(party:GetMemberFlagMask(0), 8) == 8,
         isSyncTarget = bit.band(party:GetMemberFlagMask(0), 256) == 256,
-        isTarget = (target:GetIsSubTargetActive() == 0 and serverId == target:GetServerId(0)) or (target:GetIsSubTargetActive() == 1 and serverId == target:GetServerId(1)),
+        isTarget = (target:GetIsSubTargetActive() == 0 and serverId == target:GetServerId(0)) or
+            (target:GetIsSubTargetActive() == 1 and serverId == target:GetServerId(1)),
         isSubTarget = target:GetIsSubTargetActive() == 1 and serverId == target:GetServerId(0),
         isPartyTarget = stal ~= nil and stal == 0,
         job = ffxi.GetJobAbbr(party:GetMemberMainJob(0)),
@@ -231,7 +232,8 @@ local function GetMember(i, window, target, party, stal)
         isPartyLeader = bit.band(party:GetMemberFlagMask(i), 4) == 4,
         isAllianceLeader = bit.band(party:GetMemberFlagMask(i), 8) == 8,
         isSyncTarget = bit.band(party:GetMemberFlagMask(i), 256) == 256,
-        isTarget = (target:GetIsSubTargetActive() == 0 and serverId == target:GetServerId(0)) or (target:GetIsSubTargetActive() == 1 and serverId == target:GetServerId(1)),
+        isTarget = (target:GetIsSubTargetActive() == 0 and serverId == target:GetServerId(0)) or
+            (target:GetIsSubTargetActive() == 1 and serverId == target:GetServerId(1)),
         isSubTarget = target:GetIsSubTargetActive() == 1 and serverId == target:GetServerId(0),
         isPartyTarget = stal ~= nil and stal == i,
         job = ffxi.GetJobAbbr(party:GetMemberMainJob(i)),
@@ -282,17 +284,17 @@ local function DrawName(player, showDist)
     local offsetX = 0
 
     if player.isAllianceLeader then
-        DrawDot({originX + offsetX + 3 * Scale, originY + 6 * Scale}, ui.Colors.TpBarActive)
+        DrawDot({ originX + offsetX + 3 * Scale, originY + 6 * Scale }, ui.Colors.TpBarActive)
         offsetX = offsetX + 6 * Scale
     end
 
     if player.isPartyLeader then
-        DrawDot({originX + offsetX + 3 * Scale, originY + 6 * Scale}, ui.Colors.FfxiAmber)
+        DrawDot({ originX + offsetX + 3 * Scale, originY + 6 * Scale }, ui.Colors.FfxiAmber)
         offsetX = offsetX + 6 * Scale
     end
 
     if player.isSyncTarget then
-        DrawDot({originX + offsetX + 3 * Scale, originY + 6 * Scale}, ui.Colors.Red)
+        DrawDot({ originX + offsetX + 3 * Scale, originY + 6 * Scale }, ui.Colors.Red)
         offsetX = offsetX + 6 * Scale
     end
 
@@ -433,7 +435,11 @@ end
 
 local function DrawAlliance(alliance, gOptions)
     ui.DrawUiWindow(alliance, gOptions, function()
-        imgui.SetWindowFontScale(Scale)
+        local defaultFont = imgui.GetFont()
+        local defaultSize = imgui.GetFontSize()
+        local scaledSize  = defaultSize * Scale
+
+        imgui.PushFont(defaultFont, scaledSize)
 
         local target = AshitaCore:GetMemoryManager():GetTarget()
         local party = AshitaCore:GetMemoryManager():GetParty()
@@ -451,6 +457,8 @@ local function DrawAlliance(alliance, gOptions)
                 end
             end
         end
+
+        imgui.PopFont()
     end)
 end
 
@@ -484,39 +492,39 @@ end
 ---@type xitool
 local us = {
     Name = 'us',
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
-        hideWhenSolo = T{ false },
-        showCastbar = T{ true },
-        alliance1 = T{
-            isCompact = T{ false },
-            isVisible = T{ true },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
+        hideWhenSolo = T { false },
+        showCastbar = T { true },
+        alliance1 = T {
+            isCompact = T { false },
+            isVisible = T { true },
             name = 'xitools.us.1',
-            fullSize = T{ 276, -1 },
-            compactSize = T{ -1, -1 },
-            size = T{ 276, -1 },
-            pos = T{ 392, 628 },
+            fullSize = T { 276, -1 },
+            compactSize = T { -1, -1 },
+            size = T { 276, -1 },
+            pos = T { 392, 628 },
             flags = bit.bor(ImGuiWindowFlags_NoDecoration),
         },
-        alliance2 = T{
-            isCompact = T{ false },
-            isVisible = T{ true },
+        alliance2 = T {
+            isCompact = T { false },
+            isVisible = T { true },
             name = 'xitools.us.2',
-            fullSize = T{ 276, -1 },
-            compactSize = T{ -1, -1 },
-            size = T{ 276, -1 },
-            pos = T{ 107, 628 },
+            fullSize = T { 276, -1 },
+            compactSize = T { -1, -1 },
+            size = T { 276, -1 },
+            pos = T { 107, 628 },
             flags = bit.bor(ImGuiWindowFlags_NoDecoration),
         },
-        alliance3 = T{
-            isCompact = T{ false },
-            isVisible = T{ true },
+        alliance3 = T {
+            isCompact = T { false },
+            isVisible = T { true },
             name = 'xitools.us.3',
-            fullSize = T{ 276, -1 },
-            compactSize = T{ -1, -1 },
-            size = T{ 276, -1 },
-            pos = T{ 000, 628 },
+            fullSize = T { 276, -1 },
+            compactSize = T { -1, -1 },
+            size = T { 276, -1 },
+            pos = T { 000, 628 },
             flags = bit.bor(ImGuiWindowFlags_NoDecoration),
         },
     },
@@ -572,7 +580,7 @@ local us = {
         Scale = gOptions.uiScale[1]
 
         if (options.hideWhenSolo[1] and alliCount1 > 1)
-        or (not options.hideWhenSolo[1] and alliCount1 > 0) then
+            or (not options.hideWhenSolo[1] and alliCount1 > 0) then
             DrawAlliance(options.alliance1, gOptions)
         end
         if alliCount2 > 0 then

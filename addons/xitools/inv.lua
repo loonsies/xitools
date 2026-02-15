@@ -8,39 +8,39 @@ local packets = require('utils/packets')
 local imgui = require('imgui')
 local ui = require('ui')
 
-local textures = { }
+local textures = {}
 local gfxDevice = d3d8.get_device()
 local fontWidth = imgui.CalcTextSize('A')
-local inventories = T{
+local inventories = T {
     gil = 0,
-    bag = T{
-        all  = T{},
-        inv  = T{},
-        temp = T{},
+    bag = T {
+        all  = T {},
+        inv  = T {},
+        temp = T {},
     },
-    satchel = T{
-        all = T{},
-        satchel = T{},
-        case = T{},
-        sack = T{},
+    satchel = T {
+        all = T {},
+        satchel = T {},
+        case = T {},
+        sack = T {},
     },
-    wardrobe = T{
-        all = T{},
-        wardrobe1 = T{},
-        wardrobe2 = T{},
-        wardrobe3 = T{},
-        wardrobe4 = T{},
-        wardrobe5 = T{},
-        wardrobe6 = T{},
-        wardrobe7 = T{},
-        wardrobe8 = T{},
+    wardrobe = T {
+        all = T {},
+        wardrobe1 = T {},
+        wardrobe2 = T {},
+        wardrobe3 = T {},
+        wardrobe4 = T {},
+        wardrobe5 = T {},
+        wardrobe6 = T {},
+        wardrobe7 = T {},
+        wardrobe8 = T {},
     },
-    house = T{
-        all = T{},
-        mogSafe1 = T{},
-        mogSafe2 = T{},
-        storage = T{},
-        mogLocker = T{},
+    house = T {
+        all = T {},
+        mogSafe1 = T {},
+        mogSafe2 = T {},
+        storage = T {},
+        mogLocker = T {},
     },
 }
 
@@ -52,37 +52,37 @@ local itemTypes = {
 }
 
 local slots = {
-    [    1] = 'Main',
-    [    2] = 'Sub',
-    [    3] = 'Weapon',
-    [    4] = 'Range',
-    [    8] = 'Ammo',
-    [   16] = 'Head',
-    [   32] = 'Body',
-    [   64] = 'Hands',
-    [  128] = 'Legs',
-    [  256] = 'Feet',
-    [  512] = 'Neck',
-    [ 1024] = 'Waist',
-    [ 2048] = 'L.Ear',
-    [ 4096] = 'R.Ear',
-    [ 6144] = 'Earring',
-    [ 8192] = 'L.Ring',
+    [1] = 'Main',
+    [2] = 'Sub',
+    [3] = 'Weapon',
+    [4] = 'Range',
+    [8] = 'Ammo',
+    [16] = 'Head',
+    [32] = 'Body',
+    [64] = 'Hands',
+    [128] = 'Legs',
+    [256] = 'Feet',
+    [512] = 'Neck',
+    [1024] = 'Waist',
+    [2048] = 'L.Ear',
+    [4096] = 'R.Ear',
+    [6144] = 'Earring',
+    [8192] = 'L.Ring',
     [16384] = 'R.Ring',
     [24576] = 'Ring',
     [32768] = 'Back',
 }
 
 local skills = {
-    [ 1] = 'Fists',
-    [ 2] = 'Dagger',
-    [ 3] = 'Sword',
-    [ 4] = 'Great Sword',
-    [ 5] = 'Axe',
-    [ 6] = 'Great Axe',
-    [ 7] = 'Scythe',
-    [ 8] = 'Polearm',
-    [ 9] = 'Katana',
+    [1] = 'Fists',
+    [2] = 'Dagger',
+    [3] = 'Sword',
+    [4] = 'Great Sword',
+    [5] = 'Axe',
+    [6] = 'Great Axe',
+    [7] = 'Scythe',
+    [8] = 'Polearm',
+    [9] = 'Katana',
     [10] = 'Great Katana',
     [11] = 'Club',
     [12] = 'Staff',
@@ -109,15 +109,15 @@ local skills = {
 }
 
 local jobs = {
-    [ 1] = 'WAR',
-    [ 2] = 'MNK',
-    [ 3] = 'WHM',
-    [ 4] = 'BLM',
-    [ 5] = 'RDM',
-    [ 6] = 'THF',
-    [ 7] = 'PLD',
-    [ 8] = 'DRK',
-    [ 9] = 'BST',
+    [1] = 'WAR',
+    [2] = 'MNK',
+    [3] = 'WHM',
+    [4] = 'BLM',
+    [5] = 'RDM',
+    [6] = 'THF',
+    [7] = 'PLD',
+    [8] = 'DRK',
+    [9] = 'BST',
     [10] = 'BRD',
     [11] = 'RNG',
     [12] = 'SAM',
@@ -156,11 +156,11 @@ local bags = {
 }
 
 local moveableBags = {
-    { id =  0, hasAccess = false, isGearOnly = false, name = 'inventory' },
-    { id =  5, hasAccess = false, isGearOnly = false, name = 'satchel' },
-    { id =  6, hasAccess = false, isGearOnly = false, name = 'sack' },
-    { id =  7, hasAccess = false, isGearOnly = false, name = 'case' },
-    { id =  8, hasAccess = false, isGearOnly = true,  name = 'wardrobe 1' },
+    { id = 0,  hasAccess = false, isGearOnly = false, name = 'inventory' },
+    { id = 5,  hasAccess = false, isGearOnly = false, name = 'satchel' },
+    { id = 6,  hasAccess = false, isGearOnly = false, name = 'sack' },
+    { id = 7,  hasAccess = false, isGearOnly = false, name = 'case' },
+    { id = 8,  hasAccess = false, isGearOnly = true,  name = 'wardrobe 1' },
     { id = 10, hasAccess = false, isGearOnly = true,  name = 'wardrobe 2' },
     { id = 11, hasAccess = false, isGearOnly = true,  name = 'wardrobe 3' },
     { id = 12, hasAccess = false, isGearOnly = true,  name = 'wardrobe 4' },
@@ -219,16 +219,16 @@ local function EscapeString(str)
     -- shamelessly stolen from Shinzaku's GearFinder
     if str then
         return str:
-            replace('\x81\x60', '~'):
-            replace('\xEF\x1F', 'Fire Res'):
-            replace('\xEF\x20', 'Ice Res'):
-            replace('\xEF\x21', 'Wind Res'):
-            replace('\xEF\x22', 'Earth Res'):
-            replace('\xEF\x23', 'Ltng Res'):
-            replace('\xEF\x24', 'Water Res'):
-            replace('\xEF\x25', 'Light Res'):
-            replace('\xEF\x26', 'Dark Res'):
-            replace('\x25',     '%')
+        replace('\x81\x60', '~'):
+        replace('\xEF\x1F', 'Fire Res'):
+        replace('\xEF\x20', 'Ice Res'):
+        replace('\xEF\x21', 'Wind Res'):
+        replace('\xEF\x22', 'Earth Res'):
+        replace('\xEF\x23', 'Ltng Res'):
+        replace('\xEF\x24', 'Water Res'):
+        replace('\xEF\x25', 'Light Res'):
+        replace('\xEF\x26', 'Dark Res'):
+        replace('\x25', '%')
     end
 
     return ''
@@ -236,10 +236,10 @@ end
 
 local function GetJobs(bitfield)
     if bitfield == 8388606 then
-        return T{ 'All jobs' }
+        return T { 'All jobs' }
     end
 
-    local jobList = T{}
+    local jobList = T {}
     for i = 1, 23 do
         if bit.band(1, bit.rshift(bitfield, i)) == 1 then
             table.insert(jobList, jobs[i])
@@ -269,7 +269,7 @@ local function SortInventory(lhs, rhs)
 end
 
 local function UpdateInventory(inv, res, bagId)
-    local inventory = T{ }
+    local inventory = T {}
     local itemCount = inv:GetContainerCountMax(bagId)
 
     for i = 0, itemCount do
@@ -313,7 +313,7 @@ local function UpdateInventory(inv, res, bagId)
             end
 
             if coolItem.type == itemTypes.armor
-            or coolItem.type == itemTypes.weapon then
+                or coolItem.type == itemTypes.weapon then
                 local itemSlots = GetSlots(itemRes.Slots, itemRes.Skill)
                 local itemJobs = GetJobs(itemRes.Jobs)
                 coolItem.level = ('Lv %i %s'):format(itemRes.Level, itemSlots)
@@ -362,18 +362,18 @@ local function UpdateInventories()
     inventories.house.storage = UpdateInventory(inv, res, bags.storage):sort(SortInventory)
     inventories.house.locker = UpdateInventory(inv, res, bags.mogLocker):sort(SortInventory)
 
-    inventories.bag.all = T{}
+    inventories.bag.all = T {}
         :extend(inventories.bag.inv)
         :extend(inventories.bag.temp)
         :sort(SortInventory)
 
-    inventories.satchel.all = T{}
+    inventories.satchel.all = T {}
         :extend(inventories.satchel.satchel)
         :extend(inventories.satchel.case)
         :extend(inventories.satchel.sack)
         :sort(SortInventory)
 
-    inventories.wardrobe.all = T{}
+    inventories.wardrobe.all = T {}
         :extend(inventories.wardrobe.wardrobe1)
         :extend(inventories.wardrobe.wardrobe2)
         :extend(inventories.wardrobe.wardrobe3)
@@ -384,7 +384,7 @@ local function UpdateInventories()
         :extend(inventories.wardrobe.wardrobe8)
         :sort(SortInventory)
 
-    inventories.house.all = T{}
+    inventories.house.all = T {}
         :extend(inventories.house.mogSafe1)
         :extend(inventories.house.mogSafe2)
         :extend(inventories.house.storage)
@@ -728,15 +728,15 @@ end
 ---@type xitool
 local inv = {
     Name = 'inv',
-    Aliases = T{ 'i' },
-    DefaultSettings = T{
+    Aliases = T { 'i' },
+    DefaultSettings = T {
         name = 'xitools.inv',
-        isEnabled = T{ false },
-        isVisible = T{ true },
-        isUnified = T{ true },
-        size = T{ 0, 0 },
-        maxHeight = T{ 432 },
-        pos = T{ 256, 256 },
+        isEnabled = T { false },
+        isVisible = T { true },
+        isUnified = T { true },
+        size = T { 0, 0 },
+        maxHeight = T { 432 },
+        pos = T { 256, 256 },
         flags = bit.bor(ImGuiWindowFlags_AlwaysAutoResize),
     },
     Load = function()
@@ -779,12 +779,19 @@ local inv = {
     DrawMain = function(options, gOptions)
         Scale = gOptions.uiScale[1]
         ui.DrawNormalWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
+
             if options.isUnified[1] then
                 DrawInventoryUnified()
             else
                 DrawInventory()
             end
+
+            imgui.PopFont()
         end)
     end,
 }

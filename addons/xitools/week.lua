@@ -35,7 +35,7 @@ local KeyItems = {
     CosmoCleanse        = { Id = 734, Name = "Cosmo Cleanse" },
 }
 
-local Weeklies = T{
+local Weeklies = T {
     {
         Level = '75',
         Name = 'Limbus',
@@ -113,11 +113,11 @@ local TableDef = {
         Flags = ImGuiTableColumnFlags_None,
         Width = imgui.CalcTextSize(
             Weeklies
-                :map(function(w) return w.Name end)
-                :append('Activity')
-                :sort(SortByLength)
-                :first()
-            ),
+            :map(function(w) return w.Name end)
+            :append('Activity')
+            :sort(SortByLength)
+            :first()
+        ),
         Draw = function(activity, player, timers, now)
             imgui.Text(activity.Name)
         end,
@@ -127,11 +127,11 @@ local TableDef = {
         Flags = ImGuiTableColumnFlags_None,
         Width = imgui.CalcTextSize(
             Weeklies
-                :map(function(w) return w.Level end)
-                :append('Level(s)')
-                :sort(SortByLength)
-                :first()
-            ),
+            :map(function(w) return w.Level end)
+            :append('Level(s)')
+            :sort(SortByLength)
+            :first()
+        ),
         Draw = function(activity, player, timers, now)
             imgui.Text(activity.Level)
         end,
@@ -141,11 +141,11 @@ local TableDef = {
         Flags = ImGuiTableColumnFlags_None,
         Width = imgui.CalcTextSize(
             Weeklies
-                :map(function(w) return w.KeyItem.Name end)
-                :append('Key Item')
-                :sort(SortByLength)
-                :first()
-            ),
+            :map(function(w) return w.KeyItem.Name end)
+            :append('Key Item')
+            :sort(SortByLength)
+            :first()
+        ),
         Draw = function(activity, player, timers, now)
             imgui.Text(activity.KeyItem.Name)
         end,
@@ -235,15 +235,15 @@ end
 ---@type xitool
 local week = {
     Name = 'week',
-    Aliases = T{ 'w', 'e', 'enm', },
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
+    Aliases = T { 'w', 'e', 'enm', },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
         name = 'xitools.week',
-        size = T{ -1, -1 },
-        pos = T{ 100, 100 },
+        size = T { -1, -1 },
+        pos = T { 100, 100 },
         flags = bit.bor(ImGuiWindowFlags_AlwaysAutoResize),
-        timers = T{ },
+        timers = T {},
     },
     HandleCommand = function(args, options)
         if #args == 0 then
@@ -269,7 +269,7 @@ local week = {
 
             for _, weekly in pairs(Weeklies) do
                 if not player:HasKeyItem(weekly.KeyItem.Id)
-                and keyItems.heldList[weekly.KeyItem.Id] then
+                    and keyItems.heldList[weekly.KeyItem.Id] then
                     local timestamp = now + weekly.Cooldown
                     options.timers[weekly.Name] = {
                         time = timestamp,
@@ -293,8 +293,15 @@ local week = {
         Scale = gOptions.uiScale[1]
 
         ui.DrawNormalWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
+
             DrawWeek(options.timers)
+
+            imgui.PopFont()
         end)
     end,
 }

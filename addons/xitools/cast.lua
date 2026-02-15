@@ -15,14 +15,14 @@ local ActionTypes = {
 ---@type xitool
 local cast = {
     Name = 'cast',
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
         name = 'xitools.cast',
-        size = T{ -1, -1 },
-        barSize = T{ 256, 12 },
-        pos = T{ 100, 100 },
-        color = T{ 0.83, 0.33, 0.28, 1.0 },
+        size = T { -1, -1 },
+        barSize = T { 256, 12 },
+        pos = T { 100, 100 },
+        color = T { 0.83, 0.33, 0.28, 1.0 },
         flags = bit.bor(ImGuiWindowFlags_NoDecoration),
     },
     HandlePacket = function(e, options, gOptions)
@@ -31,9 +31,9 @@ local cast = {
             local action = packets.inbound.action.parse(e.data_raw)
 
             if player
-            and action.actor_id == player.ServerId
-            and ActionTypes[action.category]
-            and bit.band(action.param, 0xFFFF) == 0x6163 then
+                and action.actor_id == player.ServerId
+                and ActionTypes[action.category]
+                and bit.band(action.param, 0xFFFF) == 0x6163 then
                 local res = AshitaCore:GetResourceManager()
 
                 if action.category == packets.inbound.action.actionTypes.SpellStart then
@@ -68,7 +68,11 @@ local cast = {
         Scale = gOptions.uiScale[1]
 
         ui.DrawInvisWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
 
             imgui.PushStyleColor(ImGuiCol_FrameBg, { 0.08, 0.08, 0.08, 0.8 })
             imgui.PushStyleColor(ImGuiCol_Border, { 0.69, 0.68, 0.78, 1.0 })
@@ -76,6 +80,7 @@ local cast = {
             imgui.Text(LastActionName)
             imgui.ProgressBar(progress, ui.Scale(options.barSize, Scale))
             imgui.PopStyleColor(3)
+            imgui.PopFont()
 
             LastProgress = progress
         end)

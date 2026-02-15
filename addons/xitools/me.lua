@@ -22,7 +22,7 @@ local function DrawHeader(name, job, jobLevel, sub, subLevel, options)
     end
 
     local jobStrWidth = imgui.CalcTextSize(jobStr)
-    local contentRightX = imgui.GetWindowContentRegionMax()
+    local contentRightX, _ = imgui.GetContentRegionAvail()
 
     imgui.SameLine()
     imgui.SetCursorPosX(contentRightX - jobStrWidth)
@@ -134,7 +134,8 @@ end
 local function DrawMe(player, party, entity, options)
     local isExpLocked = player:GetIsExperiencePointsLocked()
 
-    DrawHeader(entity.Name, player:GetMainJob(), player:GetMainJobLevel(), player:GetSubJob(), player:GetSubJobLevel(), options)
+    DrawHeader(entity.Name, player:GetMainJob(), player:GetMainJobLevel(), player:GetSubJob(), player:GetSubJobLevel(),
+        options)
     DrawHp(party:GetMemberHP(0), player:GetHPMax())
     DrawMp(party:GetMemberMP(0), player:GetMPMax())
     DrawTp(party:GetMemberTP(0), 3000)
@@ -145,12 +146,12 @@ end
 ---@type xitool
 local me = {
     Name = 'me',
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
         name = 'xitools.me',
-        size = T{ -1, -1 },
-        pos = T{ 100, 100 },
+        size = T { -1, -1 },
+        pos = T { 100, 100 },
         flags = bit.bor(ImGuiWindowFlags_NoDecoration),
     },
     DrawConfig = function(options, gOptions)
@@ -183,8 +184,15 @@ local me = {
 
         local party = AshitaCore:GetMemoryManager():GetParty()
         ui.DrawUiWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
+
             DrawMe(player, party, entity, options)
+
+            imgui.PopFont()
         end)
     end,
 }

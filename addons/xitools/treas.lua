@@ -8,7 +8,7 @@ local TextBaseWidth = imgui.CalcTextSize('A')
 local Scale = 1.0
 local WeirdTimestamps = {}
 
-local gold = { 1.0, 215/255, 0.0, 1.0 }
+local gold = { 1.0, 215 / 255, 0.0, 1.0 }
 
 local function GetTreasure(options)
     local res = AshitaCore:GetResourceManager()
@@ -16,8 +16,8 @@ local function GetTreasure(options)
     local player = AshitaCore:GetMemoryManager():GetParty():GetMemberName(0)
     local now = os.time()
 
-    local treasurePool = T{ }
-    for i = 0,9 do
+    local treasurePool = T {}
+    for i = 0, 9 do
         local treasureItem = inv:GetTreasurePoolItem(i)
         if treasureItem ~= nil and treasureItem.ItemId > 0 then
             local itemInfo = res:GetItemById(treasureItem.ItemId)
@@ -26,7 +26,7 @@ local function GetTreasure(options)
                 WeirdTimestamps[treasureItem.DropTime] = now + 300
             end
 
-            treasurePool:append{
+            treasurePool:append {
                 id = itemInfo.Id,
                 slot = i,
                 name = itemInfo.Name[1],
@@ -44,7 +44,7 @@ local function GetTreasure(options)
                 },
             }
         elseif options.showAllSlots[1] then
-            treasurePool:append{
+            treasurePool:append {
                 id = 0,
                 slot = i,
                 name = '',
@@ -60,7 +60,7 @@ end
 
 local function Roll(treasure)
     if treasure.current.hasRolled
-    or treasure.current.hasPassed then
+        or treasure.current.hasPassed then
         return
     end
 
@@ -166,7 +166,7 @@ local function DrawTreasure(treasurePool)
 
             imgui.TableNextColumn()
             if not treasure.current.hasRolled
-            and not treasure.current.hasPassed then
+                and not treasure.current.hasPassed then
                 if imgui.Button(('Roll##%i'):format(i)) then
                     Roll(treasure)
                 end
@@ -178,7 +178,7 @@ local function DrawTreasure(treasurePool)
 
             imgui.TableNextColumn()
             if imgui.Button(('Pass##%i'):format(i))
-            and not treasure.current.hasPassed then
+                and not treasure.current.hasPassed then
                 Pass(treasure)
             end
         end
@@ -190,17 +190,17 @@ end
 ---@type xitool
 local treas = {
     Name = 'treas',
-    Aliases = T{ 't' },
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
-        showAllSlots = T{ false },
+    Aliases = T { 't' },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
+        showAllSlots = T { false },
         name = 'xitools.treas',
-        size = T{ -1, -1 },
-        pos = T{ 100, 100 },
+        size = T { -1, -1 },
+        pos = T { 100, 100 },
         flags = bit.bor(ImGuiWindowFlags_AlwaysAutoResize),
     },
-    HandleCommand = function (args, options, gOptions)
+    HandleCommand = function(args, options, gOptions)
         if #args == 0 then
             options.isVisible[1] = not options.isVisible[1]
         end
@@ -224,8 +224,15 @@ local treas = {
         -- local treasurePool = GetDummyTreasure()
         if #treasurePool > 0 then
             ui.DrawNormalWindow(options, gOptions, function()
-                imgui.SetWindowFontScale(Scale)
+                local defaultFont = imgui.GetFont()
+                local defaultSize = imgui.GetFontSize()
+                local scaledSize  = defaultSize * Scale
+
+                imgui.PushFont(defaultFont, scaledSize)
+
                 DrawTreasure(treasurePool)
+
+                imgui.PopFont()
             end)
         else
             WeirdTimestamps = {}

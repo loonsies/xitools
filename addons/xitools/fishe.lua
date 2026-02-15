@@ -174,7 +174,7 @@ local fishMessages = {
     [0x36] = 'caught a giga fish',
 }
 
-local fish = T{
+local fish = T {
     624, 2216, 3965, 4288, 4289, 4290, 4291, 4304, 4305, 4306, 4307, 4308, 4309,
     4310, 4311, 4312, 4313, 4314, 4315, 4316, 4317, 4318, 4319, 4354, 4360,
     4361, 4379, 4383, 4384, 4385, 4399, 4401, 4402, 4403, 4426, 4427, 4428,
@@ -193,16 +193,16 @@ local fish = T{
 }
 
 local poolResets = {
-    [ 0] = 4,
-    [ 1] = 4,
-    [ 2] = 4,
-    [ 3] = 4,
-    [ 4] = 6,
-    [ 5] = 6,
-    [ 6] = 7,
-    [ 7] = 17,
-    [ 8] = 17,
-    [ 9] = 17,
+    [0] = 4,
+    [1] = 4,
+    [2] = 4,
+    [3] = 4,
+    [4] = 6,
+    [5] = 6,
+    [6] = 7,
+    [7] = 17,
+    [8] = 17,
+    [9] = 17,
     [10] = 17,
     [11] = 17,
     [12] = 17,
@@ -326,16 +326,16 @@ end
 ---@type xitool
 local fishe = {
     Name = 'fishe',
-    Aliases = T{ 'f', 'fish' },
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
+    Aliases = T { 'f', 'fish' },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
         name = 'xitools.fishe',
-        size = T{ -1, -1 },
-        pos = T{ 100, 100 },
+        size = T { -1, -1 },
+        pos = T { 100, 100 },
         flags = ImGuiWindowFlags_None,
-        skill = T{ 0.0 },
-        history = T{},
+        skill = T { 0.0 },
+        history = T {},
     },
     HandleCommand = function(args, options)
         if #args == 0 then
@@ -343,7 +343,7 @@ local fishe = {
         end
 
         if #args == 1 and (args[1] == 'cl' or args[1] == 'clear') then
-            options.history = T{}
+            options.history = T {}
         end
     end,
     HandlePacketOut = function(e, options)
@@ -399,8 +399,8 @@ local fishe = {
             local realMessage = GetMessageViaOffset(msg.message)
             if realMessage == nil then return end
 
-            local hookMsgs = T{ 0x08, 0x32, 0x33, 0x34, }
-            local feelMsgs = T{ 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, }
+            local hookMsgs = T { 0x08, 0x32, 0x33, 0x34, }
+            local feelMsgs = T { 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, }
 
             if hookMsgs:contains(realMessage) then
                 currentLine.hook = fishMessages[realMessage]
@@ -421,11 +421,17 @@ local fishe = {
     DrawMain = function(options, gOptions)
         Scale = gOptions.uiScale[1]
         ui.DrawNormalWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
             imgui.Text(('%-13s %5.1f'):format('Fishe', options.skill[1]))
             DrawCurrent()
             DrawHaul()
             DrawHistory(options.history)
+
+            imgui.PopFont()
         end)
     end,
 }

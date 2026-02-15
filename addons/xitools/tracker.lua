@@ -36,9 +36,9 @@ end
 
 local function IsInParty(serverId)
     local pt = AshitaCore:GetMemoryManager():GetParty()
-    for i=0, 17 do
+    for i = 0, 17 do
         if pt:GetMemberIsActive(i) == 1
-        and pt:GetMemberServerId(i) == serverId then
+            and pt:GetMemberServerId(i) == serverId then
             return true
         end
     end
@@ -47,7 +47,7 @@ local function IsInParty(serverId)
 end
 
 local function Where(table, predicate)
-    local ret = { }
+    local ret = {}
 
     for k, v in pairs(table) do
         if predicate(v) then
@@ -184,7 +184,7 @@ local function ConfigTrackers(title, trackers, getName)
             imgui.PushID(('%s%i.AliasButton'):format(title, idx))
             if imgui.Button('\xef\x83\x81 Alias') then
                 if trackedItem.Aliases == nil then
-                    trackedItem.Aliases = T{ }
+                    trackedItem.Aliases = T {}
                 end
                 table.insert(trackedItem.Aliases, { Id = { 0 }, Name = { '' } })
             end
@@ -235,12 +235,12 @@ local function ConfigTrackers(title, trackers, getName)
         end
 
         if imgui.Button('\xef\x81\xa7 Track another') then
-            trackers:append(T{
+            trackers:append(T {
                 IsEnabled = { false },
                 Id = { 0 },
                 Name = { '' },
                 Duration = { 0 },
-                ActiveItems = T{},
+                ActiveItems = T {},
             })
         end
     end
@@ -249,15 +249,15 @@ end
 ---@type xitool
 local tracker = {
     Name = 'tracker',
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
         name = 'xitools.tracker',
-        size = T{ -1, -1 },
-        pos = T{ 100, 100 },
+        size = T { -1, -1 },
+        pos = T { 100, 100 },
         flags = bit.bor(ImGuiWindowFlags_NoDecoration),
-        spells = T{ },
-        abilities = T{ },
+        spells = T {},
+        abilities = T {},
     },
     HandlePacket = function(e, options)
         -- TODO: cancel bard song timers when a song is overwritten
@@ -298,7 +298,11 @@ local tracker = {
         Scale = gOptions.uiScale[1]
 
         ui.DrawUiWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
 
             if #activeSpells > 0 then
                 DrawTrackers(activeSpells)
@@ -307,6 +311,8 @@ local tracker = {
             if #activeAbilities > 0 then
                 DrawTrackers(activeAbilities)
             end
+
+            imgui.PopFont(defaultFont)
         end)
     end,
 }

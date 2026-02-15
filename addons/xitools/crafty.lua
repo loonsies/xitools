@@ -150,11 +150,11 @@ local function DrawRecipe(recipe, skills, inv, res)
 end
 
 local recipeFilter = { '' }
-local searchResults = { [''] = { } }
+local searchResults = { [''] = {} }
 local function FilterRecipes(filter)
     local res = AshitaCore:GetResourceManager()
     if searchResults[filter] == nil then
-        searchResults[filter] = { }
+        searchResults[filter] = {}
         -- TODO: remove the "by skill" bits
         for skillId, recipeList in ipairs(recipesBySkill) do
             for _, recipe in ipairs(recipeList) do
@@ -164,7 +164,7 @@ local function FilterRecipes(filter)
                 local itemName = item.Name[1]
                 local fullName = item.LogNameSingular[1]
                 if itemName:lower():match(filter)
-                or fullName:lower():match(filter) then
+                    or fullName:lower():match(filter) then
                     table.insert(searchResults[filter], recipe)
                 end
             end
@@ -180,7 +180,7 @@ local function DrawFilteredRecipes(skills, filteredRecipes)
     local inv = GetInventoryTotals()
     local displayCount = math.min(32, #filteredRecipes)
 
-    for i=1,displayCount do
+    for i = 1, displayCount do
         local recipe = filteredRecipes[i]
         local itemName = res:GetItemById(recipe.result).LogNameSingular[1]
 
@@ -210,7 +210,7 @@ end
 local function DrawHistory(options)
     if imgui.CollapsingHeader('Craft History') then
         if imgui.Button('Clear History') then
-            options.history = T{}
+            options.history = T {}
         end
 
         local history = options.history
@@ -237,12 +237,12 @@ local function DrawHistory(options)
                 imgui.Text(('%s'):format(resultsMap[synth.result] or 'Unknown'))
 
                 imgui.TableNextColumn()
-                local skillups = T{ }
+                local skillups = T {}
                 for skillId, skillup in pairs(synth.skillup) do
                     if skillup.change ~= nil then
                         skillups:append(('%s %+.1f'):format(skillsAbbrMap[skillId] or skillId, skillup.change))
-                    -- elseif not skillup.isSkillupAllowed then
-                    --     skillups:append(('%s %s'):format(skillsAbbrMap[skillId] or skillId, iconTimes))
+                        -- elseif not skillup.isSkillupAllowed then
+                        --     skillups:append(('%s %s'):format(skillsAbbrMap[skillId] or skillId, iconTimes))
                     end
                 end
                 imgui.Text(skillups:join(' '))
@@ -261,26 +261,26 @@ end
 ---@type xitool
 local crafty = {
     Name = 'crafty',
-    Aliases = T{ 'c', 'craft' },
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
+    Aliases = T { 'c', 'craft' },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
         name = 'xitools.crafty',
-        size = T{ -1, -1 },
-        pos = T{ 100, 100 },
+        size = T { -1, -1 },
+        pos = T { 100, 100 },
         flags = ImGuiWindowFlags_AlwaysAutoResize,
-        skills = T{
-            [0] = T{ 0.0 },
-            [1] = T{ 0.0 },
-            [2] = T{ 0.0 },
-            [3] = T{ 0.0 },
-            [4] = T{ 0.0 },
-            [5] = T{ 0.0 },
-            [6] = T{ 0.0 },
-            [7] = T{ 0.0 },
-            [8] = T{ 0.0 },
+        skills = T {
+            [0] = T { 0.0 },
+            [1] = T { 0.0 },
+            [2] = T { 0.0 },
+            [3] = T { 0.0 },
+            [4] = T { 0.0 },
+            [5] = T { 0.0 },
+            [6] = T { 0.0 },
+            [7] = T { 0.0 },
+            [8] = T { 0.0 },
         },
-        history = T{},
+        history = T {},
     },
     HandleCommand = function(args, options)
         if #args == 0 then
@@ -288,7 +288,7 @@ local crafty = {
         end
 
         if #args == 1 and (args[1] == 'cl' or args[1] == 'clear') then
-            options.history = T{}
+            options.history = T {}
         end
     end,
     HandlePacketOut = function(e, options)
@@ -298,8 +298,8 @@ local crafty = {
         if e.id == 0x096 and inProgSynth == nil then
             local startSynth = packets.outbound.startSynth.parse(e.data)
             local crystal = crystalMap[startSynth.crystal]
-            local sortedIngredients = T{}
-            for i=0,startSynth.ingredientCount-1 do
+            local sortedIngredients = T {}
+            for i = 0, startSynth.ingredientCount - 1 do
                 if startSynth.ingredient[i] ~= 0 then
                     sortedIngredients:append(startSynth.ingredient[i])
                 end
@@ -313,7 +313,7 @@ local crafty = {
                 item = targetRecipe.itemId,
                 count = targetRecipe.count,
                 lost = nil,
-                skillup = T{ },
+                skillup = T {},
             }
         end
     end,
@@ -326,14 +326,14 @@ local crafty = {
             if player ~= nil and anim.player == player.ServerId and inProgSynth ~= nil then
                 inProgSynth.result = anim.param
             end
-        -- sometimes the result response will come immediately (a cancel), and
-        -- sometimes you have to wait 15 seconds. regardless, one SHOULD come.
+            -- sometimes the result response will come immediately (a cancel), and
+            -- sometimes you have to wait 15 seconds. regardless, one SHOULD come.
         elseif e.id == 0x06F then
             local synth = packets.inbound.synthResultPlayer.parse(e.data)
             -- if the server cancels our synth, nil out the in-progress object
             if synth.result == 3 or synth.result == 4 or synth.result == 6 or synth.result == 7 then
                 inProgSynth = nil
-            -- otherwise, update with the real results and push it to the GUI
+                -- otherwise, update with the real results and push it to the GUI
             elseif inProgSynth ~= nil and inProgSynth.startTime then
                 -- we don't want to replace the synth name with Mangled Mess if
                 -- a good item ID was found during the request
@@ -342,7 +342,7 @@ local crafty = {
                     inProgSynth.count = synth.count
                 end
 
-                inProgSynth.lost = T{}
+                inProgSynth.lost = T {}
                 for _, itemId in pairs(synth.lost) do
                     if itemId > 0 then
                         inProgSynth.lost:append(itemId)
@@ -361,9 +361,9 @@ local crafty = {
                 table.insert(options.history, 1, inProgSynth)
                 inProgSynth = nil
             end
-        -- skillups come after the results, but won't always appear. so we
-        -- don't wait for them, just update the most recent completed synth
-        -- with whatever skillup we get
+            -- skillups come after the results, but won't always appear. so we
+            -- don't wait for them, just update the most recent completed synth
+            -- with whatever skillup we get
         elseif e.id == 0x029 then
             local basic = packets.inbound.basic.parse(e.data)
             if basic.param < 48 or basic.param > 57 then return end
@@ -395,10 +395,16 @@ local crafty = {
     DrawMain = function(options, gOptions)
         Scale = gOptions.uiScale[1]
         ui.DrawNormalWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
             DrawSkills(options.skills)
             DrawRecipes(options.skills)
             DrawHistory(options)
+
+            imgui.PopFont()
         end)
     end,
 }

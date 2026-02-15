@@ -39,453 +39,453 @@ local StatusType = {
 }
 
 local ActionMap = {
-    [  4] = {
-        [ 23] = {
+    [4] = {
+        [23] = {
             name = 'Dia',
             dur = 60,
             type = StatusType.Dia,
             over = StatusType.Bio,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
-        [ 24] = {
+        [24] = {
             name = 'Dia II',
             dur = 120,
             type = StatusType.Dia,
             over = StatusType.Bio,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
-        [ 25] = {
+        [25] = {
             name = 'Dia III',
             dur = 150,
             type = StatusType.Dia,
             over = StatusType.Bio,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
-        [ 33] = {
+        [33] = {
             name = 'Diaga',
             dur = 60,
             type = StatusType.Dia,
             over = StatusType.Bio,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
-        [ 34] = {
+        [34] = {
             name = 'Diaga II',
             dur = 120,
             type = StatusType.Dia,
             over = StatusType.Bio,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
         [230] = {
             name = 'Bio',
             dur = 60,
             type = StatusType.Bio,
             over = StatusType.Dia,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
         [231] = {
             name = 'Bio II',
             dur = 120,
             type = StatusType.Bio,
             over = StatusType.Dia,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
         [232] = {
             name = 'Bio III',
             dur = 150,
             type = StatusType.Bio,
             over = StatusType.Dia,
-            msg = T{ 2, 264, 252 },
+            msg = T { 2, 264, 252 },
         },
-        [ 58] = {
+        [58] = {
             name = 'Paralyze',
             dur = 120,
             type = StatusType.Paralyze,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
-        [ 80] = {
+        [80] = {
             name = 'Paralyze II',
             dur = 120,
             type = StatusType.Paralyze,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [356] = {
             name = 'Paralyzega',
             dur = 120,
             type = StatusType.Paralyze,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [341] = {
             name = 'Jubaku: Ichi',
             dur = 180,
             type = StatusType.Paralyze,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [342] = {
             name = 'Jubaku: Ni',
             dur = 300,
             type = StatusType.Paralyze,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [343] = {
             name = 'Jubaku: San',
             dur = 420,
             type = StatusType.Paralyze,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
-        [ 56] = {
+        [56] = {
             name = 'Slow',
             dur = 180,
             type = StatusType.Slow,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
-        [ 79] = {
+        [79] = {
             name = 'Slow II',
             dur = 180,
             type = StatusType.Slow,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [357] = {
             name = 'Slowga',
             dur = 180,
             type = StatusType.Slow,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [344] = {
             name = 'Hojo: Ichi',
             dur = 180,
             type = StatusType.Slow,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [345] = {
             name = 'Hojo: Ni',
             dur = 300,
             type = StatusType.Slow,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [346] = {
             name = 'Hojo: San',
             dur = 420,
             type = StatusType.Slow,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [254] = {
             name = 'Blind',
             dur = 180,
             type = StatusType.Blind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [276] = {
             name = 'Blind II',
             dur = 180,
             type = StatusType.Blind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [361] = {
             name = 'Blindga',
             dur = 180,
             type = StatusType.Blind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [347] = {
             name = 'Kurayami: Ichi',
             dur = 180,
             type = StatusType.Blind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [348] = {
             name = 'Kurayami: Ni',
             dur = 300,
             type = StatusType.Blind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [349] = {
             name = 'Kurayami: San',
             dur = 420,
             type = StatusType.Blind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [216] = {
             name = 'Gravity',
             dur = 120,
             type = StatusType.Gravity,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [217] = {
             name = 'Gravity II',
             dur = 180,
             type = StatusType.Gravity,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [112] = {
             name = 'Flash',
             dur = 12,
             type = StatusType.Flash,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
-        [ 59] = {
+        [59] = {
             name = 'Silence',
             dur = 120,
             type = StatusType.Silence,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [359] = {
             name = 'Silencega',
             dur = 120,
             type = StatusType.Silence,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [253] = {
             name = 'Sleep',
             dur = 60,
             type = StatusType.Sleep,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [259] = {
             name = 'Sleep II',
             dur = 90,
             type = StatusType.Sleep,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [273] = {
             name = 'Sleepga',
             dur = 60,
             type = StatusType.Sleep,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [274] = {
             name = 'Sleepga II',
             dur = 90,
             type = StatusType.Sleep,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [463] = {
             name = 'Foe Lullaby',
             dur = 60,
             type = StatusType.Sleep,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [376] = {
             name = 'Horde Lullaby',
             dur = 60,
             type = StatusType.Sleep,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [258] = {
             name = 'Bind',
             dur = 60,
             type = StatusType.Bind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [362] = {
             name = 'Bindga',
             dur = 60,
             type = StatusType.Bind,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [252] = {
             name = 'Stun',
             dur = 5,
             type = StatusType.Stun,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [220] = {
             name = 'Poison',
             dur = 30,
             type = StatusType.Poison,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [221] = {
             name = 'Poison II',
             dur = 120,
             type = StatusType.Poison,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [225] = {
             name = 'Poisonga',
             dur = 60,
             type = StatusType.Poison,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [226] = {
             name = 'Poisonga II',
             dur = 120,
             type = StatusType.Poison,
-            msg = T{ 236, 277, 268, 271 },
+            msg = T { 236, 277, 268, 271 },
         },
         [350] = {
             name = 'Dokumori: Ichi',
             dur = 60,
             type = StatusType.Poison,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [351] = {
             name = 'Dokumori: Ni',
             dur = 120,
             type = StatusType.Poison,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [352] = {
             name = 'Dokumori: San',
             dur = 360,
             type = StatusType.Poison,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [239] = {
             name = 'Shock',
             dur = 120,
             type = StatusType.Shock,
             over = StatusType.Drown,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [238] = {
             name = 'Rasp',
             dur = 120,
             type = StatusType.Rasp,
             over = StatusType.Shock,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [237] = {
             name = 'Choke',
             dur = 120,
             type = StatusType.Choke,
             over = StatusType.Rasp,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [236] = {
             name = 'Frost',
             dur = 120,
             type = StatusType.Frost,
             over = StatusType.Choke,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [235] = {
             name = 'Burn',
             dur = 120,
             type = StatusType.Burn,
             over = StatusType.Frost,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [240] = {
             name = 'Drown',
             dur = 120,
             type = StatusType.Drown,
             over = StatusType.Burn,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [421] = {
             name = 'Battlefield Elegy',
             dur = 150,
             type = StatusType.Elegy,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [422] = {
             name = 'Carnage Elegy',
             dur = 250,
             type = StatusType.Elegy,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [423] = {
             name = 'Massacre Elegy',
             dur = 350, -- ???
             type = StatusType.Elegy,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [368] = {
             name = 'Foe Requiem',
             dur = 100,
             type = StatusType.Requiem,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [369] = {
             name = 'Foe Requiem II',
             dur = 150,
             type = StatusType.Requiem,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [370] = {
             name = 'Foe Requiem III',
             dur = 200,
             type = StatusType.Requiem,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [371] = {
             name = 'Foe Requiem IV',
             dur = 250,
             type = StatusType.Requiem,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [372] = {
             name = 'Foe Requiem V',
             dur = 300,
             type = StatusType.Requiem,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [373] = {
             name = 'Foe Requiem VI',
             dur = 350,
             type = StatusType.Requiem,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [374] = {
             name = 'Foe Requiem VII',
             dur = 400,
             type = StatusType.Requiem,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
         },
         [454] = {
             name = 'Fire Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'fire',
         },
         [455] = {
             name = 'Ice Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'ice',
         },
         [456] = {
             name = 'Wind Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'wind',
         },
         [457] = {
             name = 'Earth Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'earth',
         },
         [458] = {
             name = 'Lightning Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'lightning',
         },
         [459] = {
             name = 'Water Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'water',
         },
         [460] = {
             name = 'Light Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'light',
         },
         [461] = {
             name = 'Dark Threnody',
             dur = 120,
             type = StatusType.Threnody,
-            msg = T{ 237, 267, 278 },
+            msg = T { 237, 267, 278 },
             ele = 'dark',
         },
     },
@@ -524,7 +524,7 @@ local DefaultDebuffs = {
     threnodyEle = nil,
 }
 
-local TrackedEnemies = { }
+local TrackedEnemies = {}
 
 ---@param object table
 ---@return table
@@ -716,16 +716,16 @@ end
 local function DrawStatus(debuffs)
     local now = os.time()
     imgui.PushStyleVar(ImGuiStyleVar_ItemSpacing, { 0, 0 })
-    DrawStatusEntry('D',  now < debuffs.dia, ui.Colors.StatusWhite)
-    DrawStatusEntry('B',  now < debuffs.bio, ui.Colors.StatusBlack)
+    DrawStatusEntry('D', now < debuffs.dia, ui.Colors.StatusWhite)
+    DrawStatusEntry('B', now < debuffs.bio, ui.Colors.StatusBlack)
     DrawSeparator()
     DrawSeparator()
-    DrawStatusEntry('P',  now < debuffs.para, ui.Colors.StatusWhite)
-    DrawStatusEntry('S',  now < debuffs.slow, ui.Colors.StatusWhite)
-    DrawStatusEntry('E',  now < debuffs.elegy, ui.Colors.StatusBrown)
-    DrawStatusEntry('G',  now < debuffs.grav, ui.Colors.StatusBlack)
-    DrawStatusEntry('B',  now < debuffs.blind, ui.Colors.StatusBlack)
-    DrawStatusEntry('F',  now < debuffs.flash, ui.Colors.StatusWhite)
+    DrawStatusEntry('P', now < debuffs.para, ui.Colors.StatusWhite)
+    DrawStatusEntry('S', now < debuffs.slow, ui.Colors.StatusWhite)
+    DrawStatusEntry('E', now < debuffs.elegy, ui.Colors.StatusBrown)
+    DrawStatusEntry('G', now < debuffs.grav, ui.Colors.StatusBlack)
+    DrawStatusEntry('B', now < debuffs.blind, ui.Colors.StatusBlack)
+    DrawStatusEntry('F', now < debuffs.flash, ui.Colors.StatusWhite)
     DrawSeparator()
     DrawSeparator()
     DrawStatusEntry('Si', now < debuffs.silence, ui.Colors.StatusWhite)
@@ -739,12 +739,12 @@ local function DrawStatus(debuffs)
     DrawStatusEntry('Rq', now < debuffs.requiem, ui.Colors.StatusWhite)
     DrawSeparator()
     DrawSeparator()
-    DrawStatusEntry('S',  now < debuffs.shock, ui.Colors.StatusYellow)
-    DrawStatusEntry('R',  now < debuffs.rasp, ui.Colors.StatusBrown)
-    DrawStatusEntry('C',  now < debuffs.choke, ui.Colors.StatusGreen)
-    DrawStatusEntry('F',  now < debuffs.frost, ui.Colors.StatusCyan)
-    DrawStatusEntry('B',  now < debuffs.burn, ui.Colors.StatusRed)
-    DrawStatusEntry('D',  now < debuffs.drown, ui.Colors.StatusBlue)
+    DrawStatusEntry('S', now < debuffs.shock, ui.Colors.StatusYellow)
+    DrawStatusEntry('R', now < debuffs.rasp, ui.Colors.StatusBrown)
+    DrawStatusEntry('C', now < debuffs.choke, ui.Colors.StatusGreen)
+    DrawStatusEntry('F', now < debuffs.frost, ui.Colors.StatusCyan)
+    DrawStatusEntry('B', now < debuffs.burn, ui.Colors.StatusRed)
+    DrawStatusEntry('D', now < debuffs.drown, ui.Colors.StatusBlue)
 
     if debuffs.threnodyEle ~= nil then
         imgui.NewLine()
@@ -771,34 +771,34 @@ end
 ---@type xitool
 local tgt = {
     Name = 'tgt',
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
-        showMain = T{ true },
-        showSub = T{ false },
-        showTot = T{ false },
-        mainWindow = T{
-            isVisible = T{ true },
-            showStatus = T{ false },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
+        showMain = T { true },
+        showSub = T { false },
+        showTot = T { false },
+        mainWindow = T {
+            isVisible = T { true },
+            showStatus = T { false },
             name = 'xitools.tgt.main',
-            size = T{ 276, -1 },
-            pos = T{ 100, 100 },
+            size = T { 276, -1 },
+            pos = T { 100, 100 },
             flags = bit.bor(ImGuiWindowFlags_NoDecoration),
         },
-        subWindow = T{
-            isVisible = T{ true },
-            showStatus = T{ false },
+        subWindow = T {
+            isVisible = T { true },
+            showStatus = T { false },
             name = 'xitools.tgt.sub',
-            size = T{ 276, -1 },
-            pos = T{ 100, 200 },
+            size = T { 276, -1 },
+            pos = T { 100, 200 },
             flags = bit.bor(ImGuiWindowFlags_NoDecoration),
         },
-        totWindow = T{
-            isVisible = T{ true },
-            showStatus = T{ false },
+        totWindow = T {
+            isVisible = T { true },
+            showStatus = T { false },
             name = 'xitools.tgt.tot',
-            size = T{ 276, -1 },
-            pos = T{ 386, 100 },
+            size = T { 276, -1 },
+            pos = T { 386, 100 },
             flags = bit.bor(ImGuiWindowFlags_NoDecoration),
         },
     },
@@ -814,7 +814,7 @@ local tgt = {
         -- clear state on zone changes
         -- TODO: clear mob state on death
         if e.id == 0x00A then
-            TrackedEnemies = { }
+            TrackedEnemies = {}
         elseif e.id == 0x028 then
             HandleAction(TrackedEnemies, packets.inbound.action.parse(e.data_raw))
         elseif e.id == 0x029 then
@@ -869,20 +869,32 @@ local tgt = {
 
         if options.showMain[1] and targetActive and targetId ~= 0 then
             ui.DrawUiWindow(options.mainWindow, gOptions, function()
-                imgui.SetWindowFontScale(Scale)
+                local defaultFont = imgui.GetFont()
+                local defaultSize = imgui.GetFontSize()
+                local scaledSize  = defaultSize * Scale
+
+                imgui.PushFont(defaultFont, scaledSize)
 
                 local entity = GetEntity(targetId)
                 DrawTgt(entity, options.mainWindow)
                 totId = entity.TargetedIndex or 0
+
+                imgui.PopFont()
             end)
         end
 
         if options.showSub[1] and subTargetActive and subTargetId ~= 0 then
             ui.DrawUiWindow(options.subWindow, gOptions, function()
-                imgui.SetWindowFontScale(Scale)
+                local defaultFont = imgui.GetFont()
+                local defaultSize = imgui.GetFontSize()
+                local scaledSize  = defaultSize * Scale
+
+                imgui.PushFont(defaultFont, scaledSize)
 
                 local entity = GetEntity(subTargetId)
                 DrawTgt(entity, options.subWindow)
+
+                imgui.PopFont()
             end)
         end
 
@@ -893,10 +905,16 @@ local tgt = {
             local entity = GetEntity(totId)
             if entity then
                 ui.DrawUiWindow(options.totWindow, gOptions, function()
-                    imgui.SetWindowFontScale(Scale)
+                    local defaultFont = imgui.GetFont()
+                    local defaultSize = imgui.GetFontSize()
+                    local scaledSize  = defaultSize * Scale
+
+                    imgui.PushFont(defaultFont, scaledSize)
 
                     -- TODO: compact tot display
                     DrawTgt(entity, options.totWindow)
+
+                    imgui.PopFont()
                 end)
             end
         end

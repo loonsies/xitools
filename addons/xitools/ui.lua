@@ -3,11 +3,11 @@ local imgui = require('imgui')
 
 local ui = {
     Styles = {
-        ItemSpacing       = { 8, 4 },
-        WindowPadding     = { 10, 10 },
-        FramePaddingNone  = { 0, 0 },
-        FramePaddingSome  = { 4, 2 },
-        BarSize           = { 199, 18 },
+        ItemSpacing      = { 8, 4 },
+        WindowPadding    = { 10, 10 },
+        FramePaddingNone = { 0, 0 },
+        FramePaddingSome = { 4, 2 },
+        BarSize          = { 199, 18 },
     },
     Colors = {
         White          = { 1.00, 1.00, 1.00, 1.0 },
@@ -43,7 +43,7 @@ local ui = {
 }
 
 function ui.Scale(vector, scale)
-    local scaledVec = T{}
+    local scaledVec = T {}
 
     for _, value in ipairs(vector) do
         scaledVec:append(value * scale)
@@ -129,6 +129,10 @@ function ui.DrawNormalWindow(config, gConfig, drawStuff)
         local x, y = imgui.GetWindowPos()
         config.pos[1] = x
         config.pos[2] = y
+        
+        local w, h = imgui.GetWindowSize()
+        config.size[1] = w
+        config.size[2] = h
     end
 
     imgui.End()

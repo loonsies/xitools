@@ -132,12 +132,12 @@ end
 ---@type xitool
 local pet = {
     Name = 'pet',
-    DefaultSettings = T{
-        isEnabled = T{ false },
-        isVisible = T{ true },
+    DefaultSettings = T {
+        isEnabled = T { false },
+        isVisible = T { true },
         name = 'xitools.pet',
-        size = T{ 276, -1 },
-        pos = T{ 100, 100 },
+        size = T { 276, -1 },
+        pos = T { 100, 100 },
         flags = bit.bor(ImGuiWindowFlags_NoDecoration),
     },
     DrawConfig = function(options, gOptions)
@@ -161,8 +161,15 @@ local pet = {
         if pet == nil or pet.Name == nil then return end
 
         ui.DrawUiWindow(options, gOptions, function()
-            imgui.SetWindowFontScale(Scale)
+            local defaultFont = imgui.GetFont()
+            local defaultSize = imgui.GetFontSize()
+            local scaledSize  = defaultSize * Scale
+
+            imgui.PushFont(defaultFont, scaledSize)
+
             DrawPet(pet, options)
+
+            imgui.PopFont()
         end)
     end,
 }
